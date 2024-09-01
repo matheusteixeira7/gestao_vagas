@@ -3,10 +3,12 @@ package br.com.devnine.gestao_vagas.modules.candidate.controllers;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.devnine.gestao_vagas.exceptions.UserfoundException;
+import br.com.devnine.gestao_vagas.modules.candidate.CandidateEntity;
+import br.com.devnine.gestao_vagas.modules.candidate.CandidateRepository;
 import jakarta.validation.Valid;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("/candidate")
 public class CandidateController {
 
+    @Autowired
+    private CandidateRepository candidateRepository;
+
     @PostMapping("")
-    public ResponseEntity<Object> create(@Valid @RequestBody CandidateEntity candidateEntity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(candidateEntity);
-
+    public CandidateEntity create(@Valid @RequestBody CandidateEntity candidateEntity) {
+        this.candidateRepository.findByUsernameOrEmail(candidateEntity.getUsername(), candidateEntity.getEmail())
+                .ifPresent(user -> {
+                    throw new UserfoundException();
+                });
+        return this.candidateRepository.save(candidateEntity);
     }
-
 }
