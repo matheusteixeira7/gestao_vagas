@@ -1,4 +1,4 @@
-package br.com.devnine.gestao_vagas.modules.candidate;
+package br.com.devnine.gestao_vagas.modules.candidate.domain;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
