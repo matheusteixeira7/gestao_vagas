@@ -3,7 +3,7 @@ package br.com.devnine.gestao_vagas.modules.candidate.controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.devnine.gestao_vagas.modules.candidate.domain.CandidateEntity;
+import br.com.devnine.gestao_vagas.modules.candidate.entity.CandidateEntity;
 import br.com.devnine.gestao_vagas.modules.candidate.repository.CandidateRepository;
 import br.com.devnine.gestao_vagas.modules.candidate.usecase.CreateCandidateUsecase;
 import jakarta.validation.Valid;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
-@RequestMapping("/candidate")
+@RequestMapping("/api/v1/candidate")
 public class CandidateController {
     private CreateCandidateUsecase createCandidateUsecase;
 
