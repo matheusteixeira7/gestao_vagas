@@ -12,16 +12,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import lombok.Builder;
 import lombok.Data;
 
 @Entity(name = "job")
 @Data
+@Builder
 public class JobEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
+
+    @NotBlank(message = "Este campo é obrigatório")
     private String description;
+
+    @NotBlank(message = "Este campo é obrigatório")
     private String benefits;
+
+    @NotBlank(message = "Este campo é obrigatório")
     private String level;
 
     @ManyToOne
@@ -29,8 +39,10 @@ public class JobEntity {
     private CompanyEntity companyEntity;
 
     @Column(name = "company_id")
+    @NotNull(message = "Este campo é obrigatório")
     private UUID companyId;
 
     @CreationTimestamp
     private LocalDateTime createdAt;
+
 }

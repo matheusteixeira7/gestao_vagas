@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.devnine.gestao_vagas.exceptions.UserfoundException;
-import br.com.devnine.gestao_vagas.modules.company.entity.CompanyEntity;
+import br.com.devnine.gestao_vagas.modules.company.dto.CreateCompanyInputDTO;
 import br.com.devnine.gestao_vagas.modules.company.usecase.CreateCompanyUsecase;
 import br.com.devnine.gestao_vagas.modules.company.usecase.FindAllCompaniesUsecase;
 import jakarta.validation.Valid;
@@ -27,9 +27,9 @@ public class CompanyController {
     }
 
     @PostMapping("")
-    public ResponseEntity<Object> createCompany(@Valid @RequestBody CompanyEntity companyEntity) {
+    public ResponseEntity<Object> createCompany(@Valid @RequestBody CreateCompanyInputDTO input) {
         try {
-            var result = this.createCompanyUsecase.execute(companyEntity);
+            var result = this.createCompanyUsecase.execute(input);
             return ResponseEntity.ok(result);
         } catch (UserfoundException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
