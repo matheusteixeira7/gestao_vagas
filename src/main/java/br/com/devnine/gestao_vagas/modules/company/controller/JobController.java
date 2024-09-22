@@ -8,16 +8,15 @@ import org.springframework.web.bind.annotation.RestController;
 import br.com.devnine.gestao_vagas.modules.company.dto.CreateJobInputDTO;
 import br.com.devnine.gestao_vagas.modules.company.usecase.CreateJobUsecase;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
+
 import org.springframework.web.bind.annotation.PostMapping;
 
 @RestController
 @RequestMapping("/api/v1/job")
+@AllArgsConstructor
 public class JobController {
     private final CreateJobUsecase createJobUsecase;
-
-    public JobController(CreateJobUsecase createJobUsecase) {
-        this.createJobUsecase = createJobUsecase;
-    }
 
     @PostMapping("")
     public ResponseEntity<Object> create(@Valid @RequestBody CreateJobInputDTO input) {

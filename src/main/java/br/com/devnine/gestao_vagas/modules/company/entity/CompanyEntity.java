@@ -11,6 +11,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -30,11 +31,13 @@ public class CompanyEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
+    @NotBlank(message = "A descrição não pode ser vazia")
     private String description;
 
     @Email(message = "Deve ser um email válido")
     private String email;
 
+    @NotBlank(message = "O nome não pode ser vazio")
     private String name;
 
     @Pattern(regexp = "\\S+", message = "O username não pode conter espaços")
@@ -42,6 +45,8 @@ public class CompanyEntity {
 
     @Length(min = 6, max = 100, message = "A senha deve ter entre 6 e 100 caracteres")
     private String password;
+
+    @Pattern(regexp = "^(http|https)://.*$", message = "O website deve começar com http:// ou https://")
     private String website;
 
     @CreationTimestamp
